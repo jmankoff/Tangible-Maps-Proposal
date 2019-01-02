@@ -1,130 +1,17 @@
-
-\subsection{State of the art for related products}
-
-\subsection{Technical solution}
+Intro: The solution will be integrated into the existing AccessMap infrastructure.
+(Caspi writes)
 
 
-\subsubsection{GAP Algorithm}
-Maps uses many renditions to represent various forms of information. A single rendition, $r$, could be a type of icon, or a colored line. Each rendition can only represent one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You can not represent a road with just a circular icon. The binary value stating if a a piece of information (a.k.a., a datum), $d$, is compatible with an rendition, $r$, is denoted $c_{rd} \in \{0,1\}$. If the datum is then assigned to a compatible rendition, this is denoted with the binary value: $x_{rd}\in \{0,1\}$
+\subsection{State of the art for related products (mankoff&caspi-relatedwork.tex)}
+\input{relatedwork.tex}
 
-Our goal is to assign the most relevant pieces of information to the most useful renditions while maximizing the information we present. We  formulate this as an zero-one linear program interpretation based on the Generalized Assignment Problem
-\cite{unknown_GAP}:
-
-The zero-one linear program is formulated as follows:
-\begin{equation*}
-\textrm{ argMax }
-\sum_{i=1}^{|R|}
-\sum_{j=1}^{|D|}
-\alpha(r_i, d_j) x_{ij}
-\end{equation*}
-
-\begin{subnumcases}{
-\textrm{ s.t. } 
-}
-   \forall_{i \leq |R|} \forall_{j \leq |D|} r_{ij} x_{ij} \leq r_{ij} \label{data_rendition_compatability}\\
-   \forall_{i\leq|R|} \sum_{j\leq|D|} x_{ij} = 1 \label{rendition_Cap} \\
-\forall_{j\leq|D|} \sum_{i\leq|R|} x_{ij} \leq 1  \label{unary_data}\\
-\sum_{i\leq|R|} \sum_{j\leq|D|} x_{ij} = \min(|R|, |D|) \label{complete_fill}
-\end{subnumcases}
-
-\item[Weighting Information-Rendition Pairings]
-When weighting a particular pairing of an rendition with we must consider four features. First, is the pairing viable; can the information be represented with the abstraction. If not, the weighting in the objective function for the pairing, $\alpha_{ij}$, should be set to 0 and should not contribute any value to the maximized sum. However, if a pairing is viable we must consider a more complex representation of that pairings value. To do this we model three pairing features with the acronym (CIA): the rendition communicative ability (C), the data's importance (I), and the  attentive cost (A). We combine these by subtracting the attentive cost ($A$)  from the benefits ($C*I$): 
-\begin{equation}
-\label{eq::CIA}
-\alpha(r_i, d_j) = C(r_i, d_j)*I(d_j)-A(r_i, d_j)
-\end{equation}
-
-\begin{description}
-\item[Communicative Ability]
-Communicative Ability, $C(r,d)$ is the measure of how well a rendition, $r$, communicates a specific type of information, $d$. A high level measure of this is already accounted for in the hard constraints of the linear program: if a rendition is incompatible (\ie incapable of communicating a class of information) constraint \ref{data_rendition_compatability} will not be met and the pairing will not be accepted. But our model must support more nuanced expressions of information communication. For instance, there may be many types of renditions that label a coordinate on a map, but each are subject to certain limitations. For example, the number of parallel roads that can be represented in a space is dependent on the width of the lines representing the roads; denser road networks require thinner lines, will sparse networks could make use of more distinguishable, thicker lines. Further, certain attributes of a rendition may be more or less desirable to a specific user, such as the preference for braille or embossed text. 
-
-In our system, all renditions have a set of attributes, $a \in A_r$, (\eg uses braille, uses raised edges vs uses indented edges). Similarly, users profiles, $U$, and classes of information, $d$, have a set of preferred attributes, $\hat{A}_U,\hat{A}_d$ and weights on those preferred attributes $\beta_a$. The communicative ability of an information-rendition pairing is the weighted sum of the intersection of a renditions attributes, an information classes preferred attributes, and a user's preferred attributes. 
-\begin{equation}
-\label{eq::communicability}
-C(r,d,U) = \sum_{a\in A_r \cap \hat{A}_d}(\beta_a) +  \sum _{a\in A_r \cap \hat{A}_U}(\beta_a)
-\end{equation}
-Attributes can be expressed in many ways, and determining the intersection of a renditions attributes and preferred attributes is managed through a series of adapter interfaces. For instance, one interface is a Brailleable rendition, and which requires the rendition to generate related text in braille. A user profile and information maintains a list of relevant adapters (\ie the preferred attributes) mapped the the preferential weight and any parameters of that preference. An example parameter is a preference for lines no thicker than 2 mm or no shorter than 1mm. These parameters are applied to the rendition through the adapter. 
-
-\item[Information Importance]
-Information importance is the simplest measure of an Information-Rendition Pairing and it is central to the adaptive design paradigm our system represents. Users have a good understanding of what information is important to them. They know what accessibility features and challenges effect them most, and what points of interest are most relevant to them. For this measure, we simply ask users to rank information, the higher the ranking, $I(d_j)$, of a class of information, the higher the weight. If the information is useless or irrelevant to the user the ranking is set to zero which intern makes the weight, $\alpha$, on all rendition pairings with this information zero or less, guaranteeing that the information will not be presented. For efficiency reasons, information classes that are marked as having no importance are excluded from linear program a-priori. 
-
-\item[Attention Cost]
-The attentive cost of an rendition measures how distracting it is to gather information from the rendition. For example, if a user is using a rendition of a road network to navigate the map in search of a target, say their favorite coffee shop;  the longer it takes to find the target the more information they have to keep track of (\eg where they started, what turns they made, what landmarks they noticed). Tracking all of this information carries an attention cost that would otherwise be spent on the primary search task.
-
-The problem is that when the map is being constructed and the attention cost weight is need we do not know what the user's target(s) will be, where they will start their search, or what other information is presented that may help or hinder the search task. The presentation of that information is, in fact, our goal. Given this level of uncertainty we use a Monte-Carlo simulation to estimate the average \textit{time} it takes for the user to perform a search given a rendition-information pairing. The probability distribution used to generate this Monte-Carlo simulation are derived from a Markov-chain state model representing the actions a user can take when they encounter portions of a rendition. 
-\begin{figure}
-\label{fig::exampleStates}
-	\begin{tikzpicture}
-        % Add the states
-        \node[state] at (0, 0) (o) {Off Road};
-        \node[state] at (4, 0) (r) {On Road};
-        \node[state] at (2, 4) (i) {Intersection};
-
-        % Connect the states with arrows
-        \draw[every loop]
-        	(i) edge[loop left] node {} (i)
-        	(i) edge[bend right=20] node {} (r)
-            (r) edge[bend right=20] node {} (i)
-            (i) edge[bend right=20] node {} (o)
-            (o) edge[bend right=20] node {} (i)
-            (o) edge[loop left] node {} (o)
-            (r) edge[bend right=20] node {} (o)
-            (o) edge[bend right=20] node {} (r)
-            (r) edge[loop right=20] node {} (r);
-    \end{tikzpicture}
-\caption{Example of states of navigating a road network}
-\end{figure}
-
-Suppose that a user is navigating a rendition of a road network. There are three basic states of the action: (1) moving the finger along a road, (2) encountering an intersection of roads, and (3) moving the finger of the road. Which particular state the user is in is dependent on the specific roads paired to the rendition, and their likelihood of moving from one state to another is dependent on both the particular road network (the information) and the rendition. For example, when the user encounters a an intersection they are very likely to continue onto a new road (\eg changing from the Intersection to On-Road state), but which road is dependent on many factors. Generally they are more likely to move in the same direction and increasingly less likely to turn all the way around. If the rendition presents very thin roads, they are more likely to travel in a direction that they don't feel the roads any more, moving into the "Off-Road" state. We model the probability of this state change by selecting a random angle between $-\pi$ and $\pi$ from a normal distribution with a mean direction of 0 (no change in direction from the approaching road). If the user travels in that direction but could still feel a road (based on the width of the finger and thickness of the rendition), then the angle will be modified to continue along that road, otherwise they will move randomly in that general direction off-road until they find a new road to follow.  
-
-Each state change in the Markov-chain takes about step of one finger width, and we use a state change as a unit of time. For each simulation in the Monte-Carlo model, the user takes a "walk" across the map starting at a random point and moving towards a target. The starting points and targets are selected from a probability distribution where areas denser with information are more likely to be selected. The Markov-chain determines the walk that they take. We count the number of steps in the walk it takes to find the target given the rendition and information. The average number of steps over many models is our attention cost, meaning the more difficult (the longer it takes) it is to find information using a rendition-information pairing, the greater the attention cost and the poorer the pairing. 
-
-In terms of implementation, each rendition, $R$, has a set of states $S_R$. The probability of entering a state, $s_i\in S_R$, is dependent on the data, $D$, paired to $R$ and the state it is entering from, $s_{i-1}$: $P(s_i | D, s_{i-1})$, A walk over the map, $W$, starts from a starting point/state $s_1$ and we randomly change the state based on the probability distribution of all possible next-states. With each state we move the finger, $f$, a one finger width, $w_f$ in the direction dictated by the current state. The attention cost of a walk, $A(W)$, is the number of states need to get the point $f$ within $w_f$ of the target point $t$.The attention cost of a pairing, $A(R,D)$ is equal to the average attention cost of all of $N$ simulated walks.
-
-\begin{equation}
-W \subset S_R | s_1...s_{|W|}
-\end{equation}
-\begin{equation}
-A(W) = |W|
-\end{equation}
-\begin{equation}
-A(R,D) = \frac{\sum_{i=1...N} A(W_i)}{N}
-\end{equation}
-\end{description}
-
-\subsubsection{AccessMaps Integration}
-\label{sec:accessmaps-integration}
+\subsection{Extending the AccessMap interface to support need and route specification (Caspi-accessmap.tex)}
+\input{accessmap.tex}
+Comment out if not a development proposal
+\subsection{Automatically optimize map design based on specific needs (Mankoff-optimization.tex)}
+\input{optimization.tex}
+\subsection{Enabling User to Produce Maps Themselves (Mankoff)}
 
 
-
-\subsection{Validation}
-Describe tests trials and other related activities, and justify the choice of sample and environment. 
-\subsubsection{Study 1: Map Understanding With and Without Optimization}
-\label{sec:lab-tests}
-Our first study will focus on demonstrating the benefits of optimization in a controlled fashion. \jm{fill in with a description of how we will do a controlled, comparative study of the value of two different maps...}
-\subsubsection{Technical Validation}
-\sec{sec:technical-validation}
-
-\subsubsection{Study 2: Navigation Benefits of Optimization}
-\label{sec:field-map}
-\jm{I think we also want a study of them choosing a route of their choice and using our system?}
-
-\subsubsection{Study 3: End-to-end system use}
-\label{sec:field-web}
-\jm{test that they can produce a map on their own when they want and use it}
-
-\subsection{Input from Stakeholders}
-Describe how input will be collected from key stakeholders (including people with disabilities) to guide development activities.
-
-\subsection{Stage of Development and Specific Plan}
-
-This project includes both the \textit{proof of concept} stage and the \textit{proof of product} stage:
-\begin{description}
-\item[Implementing and Testing Optimization Algorithm (Proof of Concept)] While we have preliminary results demonstrating the viability of optimization for this problems space \ref{sec:optimization}, our proposed work includes recruiting and testing with Deaf-Blind individuals \ref{sec:lab-tests}, and resolving remaining challenges in optimization \ref{sec:optimization}.
-\item[Testing in Natural Contexts (Proof of product)] Our proposed work also includes field studies. We will be testing the map in use in field settings \ref{sec:field-map}, and testing the entire system (including web-based map creation) in the field \ref{sec:field-web}. 
-\item[Fully Integrated Prototype (Proof of product)]
-Our final implementation will be integrated into AccessMaps, a publicly available mapping application. \ref{sec:accessmaps-integration}.
-\item[Verification of Technical Requirements (Proof of product)]
-We will validate the generalizability of our approach \jm{keep this? What is the appropriate technical validation?} \ref{sec:technical-validation}
-\end{description}
-    
+\subsection{Conclusion}
+needed?
