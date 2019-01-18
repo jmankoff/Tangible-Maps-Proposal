@@ -1,8 +1,11 @@
-
-
-
+Route planning requires information that may be specific to the person creating a map. For example, the pedestrian directions from University Street Station on Second Avenue to Seattle City Hall on Fifth Avenue on Google Maps route people up Seneca Street, which has a steep 10 percent grade that’s problematic for people in wheelchairs or with certain injuries or health conditions. %By contrast, AccessMap sends people two blocks north to Pike Street, which has a much gentler grade of less than 2 percent.
+%For such people, it is important to make sure that a map clearly indicates slope. For someone else concerned about safety, however, it might be important to show whether there is a guard rail present near a particularly busy street, whether a sidewalk is wide or narrow near a busy street, or whether there is an alternative pedestrian route that connects their sidewalk to a pedestrian footpath removed from the road. 
+%For accessibility, 
+Users have a variety of needs, so while a powered wheelchair user may need to know where curb ramps are in order to navigate an intersection, a blind user may want to actively avoid certain types of curb ramps (such as those pointing to the center of an intersection). These different informational requirements present a particularly difficult situation to resolve without a specific description of sidewalk and curb ramps locations. This is why optimization is important.
+\jm{does this go in introduction instead?. also more about what optimization is/does}
 
 \subsubsection{GAP Algorithm}
+\jm{this is way too long and technical and needs to be cut way down}
 Maps uses many renditions to represent various forms of information. A single rendition, $r$, could be a type of icon, or a colored line. Each rendition can only represent one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You can not represent a road with just a circular icon. The binary value stating if a a piece of information (a.k.a., a datum), $d$, is compatible with an rendition, $r$, is denoted $c_{rd} \in \{0,1\}$. If the datum is then assigned to a compatible rendition, this is denoted with the binary value: $x_{rd}\in \{0,1\}$
 
 Our goal is to assign the most relevant pieces of information to the most useful renditions while maximizing the information we present. We  formulate this as an zero-one linear program interpretation based on the Generalized Assignment Problem
