@@ -1,5 +1,32 @@
-Intro: The solution will be integrated into the existing AccessMap infrastructure.
-(Caspi writes)
+Our development activities will focus on iterative refinement of the
+two main threads of the work, namely the development of high quality
+optimal tangible maps, and the development of a web interface that
+empowers Deaf-blind individuals to requisition their own maps on the
+fly.
+
+With respect to maps (Product 1), we next discuss the long history of tangible map use
+for accessibility, and the importance of bringing down the price and
+increasing the customizability of maps (Section~\ref{sec:background}. We then discuss our
+optimization approach in Section~\ref{sec:optimize}, and the iterative
+design approach we plan to take to improve our technology in
+Section~\ref{sec:mapping-validation}.
+
+With respect to the web interface (Product 2), we highlight the lack
+of end-user control in our review of related work
+(Section~\ref{sec:background}). In
+Section~\ref{sec:accessmap-extension} we discuss the AccessMap
+interface and our plans to extend it. Finally, in Section~\ref{sec:stakeholder-input}, we discuss how input
+from key stakeholders (namely our intended users) will be collected to
+ensure that the interface proposed in
+Section~\ref{sec:accessmap-extension} is correctly meeting their
+needs.
+
+We conclude with a discussion of the stage of development
+(Section~\ref{sec:stage}). We argue that the work represents a
+combination of proof of concept and proof of product. 
+
+%Intro: The solution will be integrated into the existing AccessMap infrastructure.
+%(Caspi writes)
 
 \jm{Notes from conversation with Harniss:
 Emphasize iteration
@@ -10,40 +37,35 @@ Blow smoke about the algorithms
 ++enviorment differs based on circumstance
 ++describe to the reviewer}
 
-\subsection{State of the art for related products (mankoff\&caspi-relatedwork.tex)}
+\subsection{State of the Art in Tangible Map Products}
+\label{sec:background}
 \input{relatedwork.tex}
 
-\subsection{Extending the AccessMap interface to 3D printed map generation (Caspi-accessmap.tex)}
-\input{accessmap.tex}
-
-\subsection{Automatically optimize map design based on specific needs (Mankoff\&Caspi-optimization.tex)}
+\subsection{Product 1: Automatically optimize map design based on specific needs}
+\label{sec:optimize}
 \input{optimization.tex}
 
-
-\subsection{Validation: Iterative Design of Mapping Solution}
-
+\subsection{Product 1: Validation: Iterative Design of Mapping Solution}
+\label{sec:mapping-validation}
 Describe tests trials and other related activities, and justify the choice of sample and environment. 
 
 \input{mapping-validation.tex}
 
+\subsection{Product 2: Extending the AccessMap interface to 3D printed
+map generation (Caspi-accessmap.tex)}
+\label{sec:accessmap-extension}
+\input{accessmap.tex}
+
 \subsection{Input from Stakeholders}
-Describe how input will be collected from key stakeholders (including people with disabilities) to guide development activities.
+\label{sec:stakeholder-input}
+\input{stakeholder-input.tex}
 
 \subsection{Stage of Development and Specific Plan}
+\labe{sec:stage}
+\input{development-stage.tex}    
 
-This project includes both the \textit{proof of concept} stage and the \textit{proof of product} stage:
-\begin{description}
-\item[Implementing and Testing Optimization Algorithm (Proof of Concept)] While we have preliminary results demonstrating the viability of optimization for this problems space \ref{sec:optimization}, our proposed work includes recruiting and testing with Deaf-blind individuals \ref{sec:lab-tests}, and resolving remaining challenges in optimization \ref{sec:optimization}.
-\item[Testing in Natural Contexts (Proof of product)] Our proposed work also includes field studies. We will be testing the map in use in field settings \ref{sec:field-map}, and testing the entire system (including web-based map creation) in the field \ref{sec:field-web}. 
-\item[Fully Integrated Prototype (Proof of product)]
-Our final implementation will be integrated into AccessMaps, a publicly available mapping application. \ref{sec:accessmaps-integration}.
-\item[Verification of Technical Requirements (Proof of product)]
-We will validate the generalizability of our approach \jm{keep this? What is the appropriate technical validation?} \ref{sec:technical-validation}
-\end{description}
-    
-
-\subsection{Enabling User to Produce Maps Themselves (Mankoff)}
-
+%\subsection{Enabling User to Produce Maps Themselves (Mankoff)}
 
 \subsection{Conclusion}
 needed?
+% LocalWords:  customizability
