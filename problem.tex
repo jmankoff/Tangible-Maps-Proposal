@@ -10,7 +10,7 @@ Unfortunately,  navigational aids that meet the needs of  Deaf-blind individuals
 
 With more fundamentally visual personalized navigational apps coming to the market for people with disabilities, we must consider how experiences for people with both vision and hearing loss can be sensitively designed to provide comfortable, safe and delightful experiences mediating both destination-directed travel and exploration of the urban environment. 
 Typical users are relegated to using Braille displays for Blind-Aware phone applications which have many drawbacks including sparse information that does not allow exploration of an area as opposed to route-following.
-These solutions are typically expensive to produce and limited in their customizability (Rice, 2005). Despite indications that improving mass fabrication techniques for the production of tactile maps could be beneficial for people with both visual and hearing loss, this area remains relatively unexplored in contrast to the body of work on mobile navigation apps and other connected devices that serve as navigational aids.
+These solutions are  expensive to produce and limited in their customizability \cite{rice2005design}. Despite indications that improving mass fabrication techniques for the production of tactile maps could be beneficial for people with both visual and hearing loss, this area remains relatively unexplored in contrast to the body of work on mobile navigation apps and other connected devices that serve as navigational aids.
 Recent work has begun to explore the use of 3D printing to reduce cost, however other than our preliminary participant study (described below), we are not aware that these systems have been tested with Deaf-blind individuals and lack customizability. 
 
 Our solution is a system that can empower Deaf-blind individuals to produce  customized, 3D printed tangible maps on their own. Our approach will maximize the integration of Deaf-blind individuals into society by increasing their independence and their self-sufficiency. Our solution combines a method for generating custom maps with an accessible tool for generating these maps. We will iterative test our prototypes and process. In particular, in this proposal, we will demonstrate (1) The efficacy of our product in meeting the needs of Deaf-blind individuals (2)  The iterative process that will allow us to define, test, and refine our product (3) our plan for assessing effectiveness and cost of our product. 
@@ -18,39 +18,52 @@ Our solution is a system that can empower Deaf-blind individuals to produce  cus
 \subsection{Population: Who is being impacted}
 \jm{xx text on deaf blind}
 
+Deaf-Blind: 35-40,000 \cite{watson1993model}
+
+(Blind: 3\% of Americans are legally blind (3.4 million); vision loss is among the top 10 disabilities )
+
+Tactile maps are something that the NFB has definitely put time into investigating \cite{lobben2015tactile}
+
+
 \subsection{Need: Our Community of Practice Experiences Daily Exclusion}
 
-We conducted a  preliminary study with 27 Deaf-blind individuals to assess need. We asked participants to explain how they travel and the issues most troublesome to them. 
+We conducted a  preliminary study with 27\jm{27 or four?} Deaf-blind individuals to assess need. We asked participants to explain how they travel and the issues most troublesome to them. 
 Our study aimed to better understand how Deaf-blind people currently access community travel and 
 accommodate inaccessibility in the built environment. In addition we were interested to know whether a tangible map we 3D printed for the area in which the participants met us added to their overall knowledge and confidence about their knowledge of that neighborhood.
 
-We first asked the participants to meet us at the public library where the Deaf-blind Service Center organizes community events. 
-We observed their arrival to the library location. We also conducted semi-structured interviews with four individuals who are Deaf-blind their travel habits and strategies for using inaccessible built environments. 
-We presented the participants a tactile map of the area in which we met them and asked participants to survey the tactile map. We asked them to find the location of the library in which we met which was signified by a \textit{landmark} tactile icon. We asked participants to explore the area and note any items, landmarks, street-names, buildings, bus stops or features that they understood to be in the area their hands were exploring. We observed the manner in which they explored the map and recorded their exploration via video. It should be noted that since individuals were conversing with us through an interpreted sign language, they would interrupt the exploration session to explain to us what they understood about the map.
+%We first asked the participants to meet us at the public library where the Deaf-blind Service Center organizes community events. 
+%We observed their arrival to the library location. 
+We conducted semi-structured interviews  with four\jm{27 or four?} individuals who are Deaf-blind at a public library location familiar to them. We asked about their travel habits and strategies for using inaccessible built environments.
+We presented the participants a tactile map of the area in which we met them and asked participants to survey the tactile map. We asked them to find the location of the library in which we met, which was signified by a \textit{landmark} tactile icon. \jm{do we have a picture of this?} We asked participants to explore the area and note any items, landmarks, street-names, buildings, bus stops or features that they understood to be in the area their hands were exploring. %We observed the manner in which they explored the map and recorded their exploration via video. %It should be noted that since individuals were conversing 
+Participants conversed with us through  interpreted sign language, and the whole session was video recorded. %, they would interrupt the exploration session to explain to us what they understood about the map.
 
-We extracted the following key insights, which we will use to inform the design of this development project and we will also factor directly into the production of parsimonious yet useful tactile representations on the maps:
+%We extracted the following key insights, which we will use to inform the design of this development project and we will also factor directly into the production of parsimonious yet useful tactile representations on the maps:
 
-\begin{itemize}
-  \item Participants felt that their city was becoming harder to access because the terrain is changing so fast. At first, they were surprised to learn via our tactile map about the new buildings and other changes to the environment. Some expressedly voiced frustrations, "...landmarks are disappearing! I thought this was there and now it is not. Now it is a big multi level building!" 
+Our interviews highlighted the need to support increased independence. All participants indicated they asked for help from a friend or stranger in their travel to the meeting location%: frequently seeking help created a perceived social burden. Furthermore, p
+However, participants were concerned about creating a burden for helpers and worried that someone may not be available when they most needed it. 
+%Many indicated it is important for them to find alternate solutions that can increase the independence of the Deaf-blind in their daily lives.
+Participants also mentioned the difficulty of learning about changes in the environment such as new building. One said: %\item Participants felt that their city was becoming harder to access because the terrain is changing so fast. At first, they were surprised to learn via our tactile map about the new buildings and other changes to the environment. Some expressly voiced frustrations, 
+"...landmarks are disappearing! I thought this was there and now it is not. Now it is a big multi level building!" 
 
-  \item All participants indicated they asked for help from a friend or stranger in their travel to the meeting location: frequently seeking help created a perceived social burden. Furthermore, participants worried that someone may not be available when they most needed it. Many indicated it is important for them to find alternate solutions that can increase the independence of the Deaf-blind in their daily lives.
+With regard to the design of the tactile map, participants highlighted the importance of choosing good ways to convey information. For example, Braille was "sharp to the touch" and difficult to interpret without memorizing abbreviations due to limited space. Providing tactile maps with the right details, at the right density and frequency is crucial. For example, participants found it confusing when there was no tactile information when their finger was inside a large park. However, inserting tactile information in these situations brings up one of our main design challenges, e.g., the granularity and density of tactile presentation.
 
-  \item Labeling maps with Braille seemed a straightforward solution to us, but participants non-uniformly understood the abbreviations we used and some indicated discomfort with the 3D printed Braille that was produced via additive manufacturing, indicating it was too sharp to the touch.
 
-  \item Participants found it difficult to do anything else when holding the map in one hand, tucking their cane under one arm and reading the tactile map with the other hand. In an actual travel scenario, such
-difficulty might result in loss of orientation, thus interrupting
-the travel task and potentially causing confusion and frustration.
-
-  \item Providing tactile back with the right details, at the right density and frequency is crucial. For example, participants found it confusing when there was no tactile information when their finger was inside a large park. However, inserting tactile information in these situations brings up one of our main design challenges, e.g., the granularity and density of tactile presentation.
-\end{itemize}
+%\\item Labeling maps with Braille seemed a straightforward solution to us, but participants non-uniformly understood the abbreviations we used and some indicated discomfort with the 3D printed Braille that was produced via additive manufacturing, indicating it was too sharp to the touch.
+%\item Participants found it difficult to do anything else when holding the map in one hand, tucking their cane under one arm and reading the tactile map with the other hand. In an actual travel scenario, such
+%difficulty might result in loss of orientation, thus interrupting
+%the travel task and potentially causing confusion and frustration.
+%\end{itemize}
 
 \ac{finish with a personal quote from Bruce}
 
+%jm{XX Anat, do you have any text on this?}
 
+\subsection{Importance: How important is it to solve this problem }
 
-jm{XX Anat, do you have any text on this?}
-
-\subsection{Importance: How important is it to solve this problem }\jm{will generate a product or products (e.g., materials, devices, systems, methods, measures, techniques, tools, prototypes, processes, or intervention protocols) that can be used to maximize the full inclusion and integration into society, employment, independent living, family support, or economic and social self-sufficiency of individuals with disabilities, especially individuals with the most severe disabilities.}
+Mobility and orientation are among the biggest challenges for visually impaired people.
+GPS systems allow for verbal exchange of itineraries and navigation but do not allow for spatial understanding of environment. 
+Maps are inherently visual and therefore inherently inaccessible. 
+In addition to perpetuating challenges in mobility and navigation, this results in social exclusion. There is a recognized need to design graphical material in an accessible way, but the diversity of user group, available technologies and breadth of tasks create significant  complexity. 
 
 \jm{XX Anat, do you have any existing text?}
 
@@ -61,12 +74,7 @@ xx something about general importance of independence, etc
 ??
 
 
-This project presents an alternative approach to understanding the pedestrian experience. Challenging the existing primacy afforded to vision, this work takes a tactile approach. Physical abstractions are used as a means to guide people through the multi-sensory environments encountered everyday. Designed as tools that enhance spatial understanding for people within a large range of visual capacities, these maps consider circumstances that influence a full spectrum of experience. The maps produced confront gaps in the cartographic record as it pertains to inclusive design, and considers how that is manifest in the lived experience.
-
-Impetus for research 
-
-\ac{Mobility and orientation are biggest challenges for visually impaired people
-GPS systems allow for verbal exchange of itineraries and navigation but do not allow for spatial understanding of environment. 
-Maps are inherently visual and therefore inherently inaccessible
-In addition to perpetuating challenges in mobility and navigation, results in social exclusion. There is a recognized need to design graphical material in an accessible way, but diversity of user group, available technologies and breadth of tasks create significant complexity 
-}
+This project presents an alternative approach to understanding the pedestrian experience. Challenging the existing primacy afforded to vision, this work takes a tactile approach. 
+%Physical abstractions are used as a means to guide people through the multi-sensory environments encountered everyday. Designed as tools that enhance spatial understanding for people within a large range of visual capacities, these maps consider circumstances that influence a full spectrum of experience.The maps produced confront gaps in the cartographic record as it pertains to inclusive design, and considers how that is manifest in the lived experience.
+\jm{Anat, I commented out some text  (above in the latex, you can't see it in the pdf) because I am concerned from my discussion with the program officer that this is too philosophical for the reviewers, who just want a good story about a project changing lives}
+By encoding important information in a tactile form, and optimizing the tactile readability of the maps, we can help to change the pedestrian navigation experience. Our system is a tool that will enable users to create their own solutions independently, and to navigate independently. This in turn will maximize their independence and improve their inclusion into society, access to employment, and ultimately their economic and social self-sufficience. 

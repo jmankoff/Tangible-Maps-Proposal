@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{appendix}
-\usepackage[backend=biber,natbib=true,doi=true]{biblatex}
+%\usepackage[backend=biber,natbib=true,doi=true,citestyle=apa]{biblatex}
 \usepackage{multirow}
 \usepackage{xassoccnt}
 \usepackage{blindtext}
@@ -92,7 +92,10 @@
 \end{appendices}
 
 \pagebreak
-\printbibliography
+
+\bibliographystyle{apalike}
+\bibliography{bibliography}
+%\printbibliography
 
 
 \end{document}
