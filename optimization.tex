@@ -13,8 +13,6 @@ users have varied needs.  A powered wheelchair user may need to know the locatio
 \textit{Optimization} algorithms makes tactile maps accessible and actionable.  Here, we describe both: (1) optimizations that balance information richness with tactile usability, and (2) optimization cost functions that allow customization by Deaf-blind users of varied aspects of their travel experience.
 %SK:  Now define optimization and what it does.
 
-\jm{does this go in introduction instead?. also more about what optimization is/does A: I think that's where we were going before and it blew up the introduction. I think it's important to highlight here how optimization can make these maps actionable.}
-
 \subsubsection{Previous Development: Optimization Approach}
 Maps use many renditions to represent various forms of information. A  rendition could be a type of icon, or a colored line. Each rendition can represent only one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You cannot represent a road with just a circular icon. 
 %The binary value stating if a a piece of information (a.k.a., a datum), $d$, is compatible with an rendition, $r$, is denoted $c_{rd} \in \{0,1\}$. If the datum is then assigned to a compatible rendition, this is denoted with the binary value: $x_{rd}\in \{0,1\}$
@@ -115,6 +113,11 @@ A key problem here is that when the map is being constructed and the attentive c
 An optimization algorithm can use this information to decide on the optimal map. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off-the-shelf algorithms can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as a zero-one linear program interpretation based on the Generalized Assignment Problem
 \cite{kuhn1955hungarian}. 
 
+During this Development Stage we will also develop proper system tests to assess algorithmic accuracy/validity, costing for  enhanced Pedestrian Accessibility, testing that feasible routes are produced. Tests would be performed on  an array of Test addresses and resulting locations, on an array of user-defined choices and preferences, and test on 
+intended and randomly selected street segments in Seattle (to test for the presence and accuracy of sidewalk information)
+
+
+
 \subsubsection{Validation}
 \ac{JM: need your input here}
 \ac{ make sure to include tests for both adequate balance for legibility and feature richness as well as tests for parametrization }
@@ -125,6 +128,10 @@ The resulting tangible map depictions and choices will be valid.
 
 \ac{this is just an example of a usability validation:}
 When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
+
+\ac{this is an example of parameterization}
+For a set of sample preferences, the optimization algorithm can be configured to provide a slightly longer but safer walking route rather than the shortest route.
+
 
 Here we describe our validation tests for both statements. The data elements and sources are referencing tests and data collection that will occur with our community partners. These data collection activities are described in later sections with greater detail.
 
@@ -141,9 +148,23 @@ The resulting tangible map depictions and choices will be valid.}
 When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
 }
 
+\texttt{Performance Metrics:} 
+
+\texttt{Data Elements \& Sources:}
+
+\texttt{Analysis Procedure:}
+
+\textbf{Validation Statement 3:
+For a set of sample trips, the new OTP can be configured to take a slightly longer but safer walking route rather than the shortest route.
+}
 
 \texttt{Performance Metrics:} 
 
 \texttt{Data Elements \& Sources:}
 
 \texttt{Analysis Procedure:}
+
+\label{sec:mapping-validation}
+\jen{Describe tests trials and other related activities, and justify the choice of sample and environment. }
+
+\input{mapping-studies.tex}

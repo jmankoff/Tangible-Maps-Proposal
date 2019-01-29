@@ -28,19 +28,44 @@ OpenSidewalks is led by the Taskar Center for Accessible Technology (TCAT) at th
 
 Our prior work in the OpenSidewalks project defined a data standard for describing the pedestrian environment and the pedestrian network. OpenSidewalks promotes equity in pedestrian routes by making sidewalks first-class members of an open data transportation network \cite{bolten2017}. Collecting open sidewalk information supports a variety of use cases and downstream activities, including addressing the informational gap for pedestrians of all abilities, automated trip planning customized to individual abilities, and furnishing rich analytic tools for data-driven urban planning. 
 
-In order to facilitate the end goal, the OpenSidewalks project focused on employing open source, crowd contributed, geospatial data from OpenStreetMap. OpenStreetMap was chosen for its extensive global coverage and easily extendable data schema. This platform allows for the project to easily pull from a large existing data pool, while also making it simple enough to fill in informational gaps as they pertain to pedestrians. \ac{cite OSM}. For inclusion of updatde transit data, OSM is also an appropriate platform choice since it is designed to include support for updated transportation data from fixed-route services (GTFS feeds).
+In order to facilitate the end goal, the OpenSidewalks project focused on employing open source, crowd contributed, geospatial data from OpenStreetMap (OSM). OpenStreetMap was chosen for its extensive global coverage and easily extendable data schema. This platform allows for the project to easily pull from a large existing data pool, while also making it simple enough to fill in informational gaps as they pertain to pedestrians. For inclusion of updated transit data, OSM is also an appropriate platform choice since it is designed to include support for updated transportation data from fixed-route services (GTFS feeds) \cite{OpenStreetMap}.
 
-There are many aspects of the pedestrian environment that we consider for inclusion in pre-optimized tangible map tiles for people who are Deaf-blind.  Based on our pilot focus groups and informational interviews, we incorporated \textit{surfaces}, \textit{topography} and \textit{street interfaces} into our own published data standard described below; these critical features promote wayfinding, mobility and safety for people with a range of visual capacities. 
+There are many aspects of the pedestrian environment that we consider for inclusion in pre-optimized tangible map tiles for people who are Deaf-blind.  Based on our pilot focus groups and informational interviews, we incorporated \textit{surfaces}, \textit{topography} and \textit{street interfaces} into our own published data standard described by OpenSidewalks; these critical features promote wayfinding, mobility and safety for people with a range of visual capacities. Figure \ref{fig:DataFeatures} demonstrate the features of a surface that were evaluated for inclusion in the maps. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=5in]{pics/SidewalkFeatures.jpg}
+    \caption{Features of footpath surfaces included in the OpenSidewalks data standard, for inclusion in our tactile maps}
+    \label{fig:DataFeatures}
+\end{figure}
+
+Appendix \ref{sec:standarddata} includes an overview of features the OpenSidewalks data project collects pertinent to blind, low vision and Deaf-blind pedestrians. As requisite features of any pedestrian environment, surfaces are first explored, followed by topography, which is nearly as ubiquitous.  Street interfaces, while occupying less space in a pedestrian environment, arguably have the greatest impact on pedestrian safety and well-being and are the third feature set considered. 
+
 
 \subsubsection{Proposed Development}
+Only some of the surface features we discuss have been studied in relationship to the experience of visually impaired pedestrians (Secchi, Lauria, and Cellai 2017). 
 
-The considerations we outlined in the OpenSidewalks data standard are meant to facilitate a more comprehensive approach to pedestrian mapping and to encourage design thinking with a low vision, blind or Deaf-blind experience in mind. Several open questions remain in order to understand the use of the standards towards fabricating Tactile Maps in our development project. First, we need to ascertain which of the pedestrian cartographic features from OpenSidewalks should be prioritized in tactile maps given that not all could be equally weighted \cite{haberling2008proposed}.
-Second, the features we describe may not be appropriate for all map scales.  Only some of the surface features we discuss have been studied in relationship to the experience of visually impaired pedestrians (Secchi, Lauria, and Cellai 2017). 
+In this development task, we plan to fully collect all the cartographic features of the OpenSidewalks standards in two pilot areas. This will 
+support the development and testing of our Proof of Product application.
+We will use the data in the creation of the tactile maps to enable both testing the optimization algorithm we develop (Section \ref{sec:optimize}) and appropriate environments for field studies (Section \ref{test:fieldstudies}). We will be able to better answer several open questions remaining in understanding the use of the standards towards fabricating Tactile Maps with pilot zones in very different environments:
+\begin{description}
+\item[Downtown Seattle by City Hall] This area contains a significant volume of Seattle's fixed-route bus lines and lightRail transit, including two undergraound stations. The Downtown Seattle Zone will be the testing ground for many important use cases including servicing 
+users who take transit to travel to or from a downtown core, with a highly complex geographical topology (many hills) and transit and pedestrian network.
+\item[The University of Washington LightRail Station] is a transit transfer center and a park‐and‐ride, along with a hub for hospitals and patient care facilities. The University of Washington Stations 
+Zone will be the testing ground for the transfer center use case: a traveler needs to transfer from one transit route to another and must locate the appropriate bus bays within the transit center to complete his or her trip.
+\end{description}
+
+\begin{comment}
+push this to validation
+
+First, we need to provide a prioritization of the cartographic features from OpenSidewalks as they pertain  ascertain which of the pedestrian cartographic features from OpenSidewalks should be prioritized in tactile maps given that not all could be equally weighted \cite{haberling2008proposed}.
+Second, the features we describe may not be appropriate for all map scales or travel purposes.   
 Third, our previous tests did not include field testing. 
-Third, we ought to offer different weighting for different map purpose (for example, bus stops are not as highly prioritized when users request a map for local exploration, whereas bus stops and their amenities need to be highlighted when a map is requested for a specific transit trip).
+We ought to offer different weighting for different map purpose (for example, bus stops are not as highly prioritized when users request a map for local exploration, whereas bus stops and their amenities need to be highlighted when a map is requested for a specific transit trip).
+
+\end{comment}
 
 
-As requisite features of any pedestrian environment, surfaces are first explored, followed by topography, which is nearly as ubiquitous.  Street interfaces, while occupying less space in a pedestrian environment, arguably have the greatest impact on pedestrian safety and well-being and are the third feature set considered. Appendix \ac{sec:standardfeatures} includes an overview of features the OpenSidewalks data project collects pertinent to blind, low vision and Deaf-blind pedestrians.
 
 \subsubsection{Validation}
 
