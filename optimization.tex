@@ -1,14 +1,25 @@
-Route planning requires information that may be specific to the person creating a map. For example, the pedestrian directions from University Street Station on Second Avenue to Seattle City Hall on Fifth Avenue on Google Maps route people up Seneca Street, which has a steep 10 percent grade that is problematic for people in wheelchairs or with certain injuries or health conditions. %By contrast, AccessMap sends people two blocks north to Pike Street, which has a much gentler grade of less than 2 percent.
-%For such people, it is important to make sure that a map clearly indicates slope. For someone else concerned about safety, however, it might be important to show whether there is a guard rail present near a particularly busy street, whether a sidewalk is wide or narrow near a busy street, or whether there is an alternative pedestrian route that connects their sidewalk to a pedestrian footpath removed from the road. 
-%For accessibility, 
-Users have a variety of needs, so while a powered wheelchair user may need to know where curb ramps are in order to navigate an intersection, a blind user may want to actively avoid certain types of curb ramps (such as those pointing to the center of an intersection). These different informational requirements present a particularly difficult situation to resolve without a specific description of sidewalk and curb ramps locations. In addition, it is not possible to represent every possible piece of important information in any map, and the amount of information that can be represented is further reduced in a tactile map. This is why optimization is important.
-\jm{does this go in introduction instead?. also more about what optimization is/does}
 
-\subsubsection{Optimization Approach}
-Maps uses many renditions to represent various forms of information. A  rendition could be a type of icon, or a colored line. Each rendition can only represent one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You can not represent a road with just a circular icon. 
+\subsubsection{Background and State of the Art}
+
+Route planning requires information that may be specific to the person creating a map. For example, Google Maps routes pedestrian directions from University Street Station on Second Avenue to Seattle City Hall on Fifth Avenue up Seneca Street, which has a steep 10 percent grade that is problematic for people in wheelchairs or with certain injuries or health conditions.
+%SK:  how about older people?  That's not a "health condition" to me :).
+%In contrast, AccessMap routes people two blocks north to Pike Street, which has a much gentler grade of less than 2 percent.
+%For such people, it is important to ensure that a map clearly indicates slope. For those concerned about safety, however, it might be more important to show whether a guard rail is present near a particularly busy street, whether a sidewalk is wide or narrow near a busy street, or whether an alternative pedestrian route connects their sidewalk to a pedestrian footpath removed from the road. 
+%For accessibility, 
+users have varied needs.  A powered wheelchair user may need to know the location of curb ramps to navigate an intersection. A blind user may want to actively avoid certain types of curb ramps (such as those pointing to the center of an intersection). These different informational requirements present a particularly difficult situation to resolve without a detailed description of the available paths, how they are connected, and particular attributes (like curb ramps and their locations) \cite{bolten2017}. Furthermore, it is not possible to represent every possible piece of important information on any map. In particular, the amount of information that can be represented is further reduced in a tactile map. 
+%SK:  Explain reason for preceding statement.
+
+%SK.  Start discussion here.
+\textit{Optimization} algorithms makes tactile maps accessible and actionable.  Here, we describe both: (1) optimizations that balance information richness with tactile usability, and (2) optimization cost functions that allow customization by Deaf-blind users of varied aspects of their travel experience.
+%SK:  Now define optimization and what it does.
+
+\jm{does this go in introduction instead?. also more about what optimization is/does A: I think that's where we were going before and it blew up the introduction. I think it's important to highlight here how optimization can make these maps actionable.}
+
+\subsubsection{Previous Development: Optimization Approach}
+Maps use many renditions to represent various forms of information. A  rendition could be a type of icon, or a colored line. Each rendition can represent only one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You cannot represent a road with just a circular icon. 
 %The binary value stating if a a piece of information (a.k.a., a datum), $d$, is compatible with an rendition, $r$, is denoted $c_{rd} \in \{0,1\}$. If the datum is then assigned to a compatible rendition, this is denoted with the binary value: $x_{rd}\in \{0,1\}$
 
-Our goal is to assign the most relevant pieces of information to the most useful renditions while maximizing the information we present.  To do this, we need a model that describes what the most relevant information is.
+Our goal is to assign the most relevant pieces of information to the most useful renditions while maximizing the amount of information we present.  To do this, we need a model that describes what the most relevant information is.
 
 %The zero-one linear program is formulated as follows:
 %\begin{equation*}
@@ -28,7 +39,9 @@ Our goal is to assign the most relevant pieces of information to the most useful
 %\end{subnumcases}
 
 %\item[Weighting Information-Rendition Pairings]
-More specifically, when deciding how (or whether) to render a piece of information, we must consider three features with the acronym (CIA): the rendition communicative ability (C), the data's importance (I), and the  attentive cost (A). We combine these by subtracting the attentive cost ($A$)  from the benefits ($C*I$): 
+Specifically, when deciding how (or whether) to render a piece of information, we must consider three features with the acronym (CIA): the rendition's communicative ability (C), the data's importance (I), and the attentive cost (A).
+%SK: Will readers know what "attentive cost" means? You use this interchangeably with "attention cost."  I changed all refs to the former for consistency.
+We combine these by subtracting the attentive cost ($A$)  from the benefits ($C*I$): 
 \begin{equation}
 \label{eq::CIA}
 \alpha(r_i, d_j) = C(r_i, d_j)*I(d_j)-A(r_i, d_j)
@@ -36,27 +49,28 @@ More specifically, when deciding how (or whether) to render a piece of informati
 
 \begin{description}
 \item[Communicative Ability]
-Communicative Ability, $C(r,d)$ is the measure of how well a rendition, $r$, communicates a specific type of information, $d$.
+Communicative Ability, $C(r,d)$, is the measure of how well a rendition, $r$, communicates a specific type of information, $d$.
 %A high level measure of this is already accounted for in the hard constraints of the linear program: if a rendition is incompatible (\ie incapable of communicating a class of information) constraint \ref{data_rendition_compatability} will not be met and the pairing will not be accepted. But our model must support more nuanced expressions of information communication. 
 %For instance, there may be many types of renditions that label a coordinate on a map, but each are subject to certain limitations. 
-For example, the number of parallel roads that can be represented in a space is dependent on the width of the lines representing the roads; denser road networks require thinner lines, will sparse networks could make use of more distinguishable, thicker lines. Further, certain attributes of a rendition may be more or less desirable to a specific user, such as the preference for braille or embossed text. 
+For example, the number of parallel roads that can be represented in a space depends on the width of the lines representing the roads; denser road networks require thinner lines, while sparse networks could make use of more distinguishable, thicker lines. Further, certain attributes of a rendition may be more or less desirable to a specific user, such as the preference for braille or embossed text. 
 %In our system, all renditions have a set of attributes, $a \in A_r$, (\eg uses braille, uses raised edges vs uses indented edges). Similarly, users profiles, $U$, and classes of information, $d$, have a set of preferred attributes, $\hat{A}_U,\hat{A}_d$ and weights on those preferred attributes $\beta_a$. 
-More formally, the communicative ability of an information-rendition pairing is the weighted sum of the intersection of a renditions attributes, an information classes preferred attributes, and a user's preferred attributes. 
+More formally, the communicative ability of an information-rendition pairing is the weighted sum of the intersection of a rendition's attributes, an information class's preferred attributes, and a user's preferred attributes. 
 \begin{equation}
 \label{eq::communicability}
 C(r,d,U) = \sum_{a\in A_r \cap \hat{A}_d}(\beta_a) +  \sum _{a\in A_r \cap \hat{A}_U}(\beta_a)
 \end{equation}
-%Attributes can be expressed in many ways, and determining the intersection of a renditions attributes and preferred attributes is managed through a series of adapter interfaces. For instance, one interface is a Brailleable rendition, and which requires the rendition to generate related text in braille. A user profile and information maintains a list of relevant adapters (\ie the preferred attributes) mapped the the preferential weight and any parameters of that preference. An example parameter is a preference for lines no thicker than 2 mm or no shorter than 1mm. These parameters are applied to the rendition through the adapter. 
+%Attributes can be expressed in many ways, and determining the intersection of a rendition's attributes and preferred attributes is managed through a series of adapter interfaces. For instance, one interface is a Braille-compliant rendition, which requires the rendition to generate related text in braille. A user profile and information maintains a list of relevant adapters (\ie the preferred attributes) mapped to the preferential weight and any parameters of that preference. An example parameter is a preference for lines no thicker than 2 mm or no shorter than 1mm. These parameters are applied to the rendition through the adapter. 
 
 \item[Information Importance]
 %Information importance is the simplest measure of an Information-Rendition Pairing and it is central to the adaptive design paradigm our system represents. 
-Users have a good understanding of what information is important to them. They know what accessibility features and challenges effect them most, and what points of interest are most relevant to them. %For this measure, we simply 
-Thus, we ask users to rank information. %, the higher the ranking, $I(d_j)$, of a class of information, the higher the weight. If the information is useless or irrelevant to the user the ranking is set to zero which intern makes the weight, $\alpha$, on all rendition pairings with this information zero or less, guaranteeing that the information will not be presented. For efficiency reasons, information classes that are marked as having no importance are excluded from linear program a-priori. 
+Users know what information is important to them. They know the accessibility features and challenges that affect them most, and what points of interest are most relevant to them. %For this measure, we simply 
+Thus, we ask users to rank information. %, the higher the ranking, $I(d_j)$, of a class of information, the higher the weight. If the information is useless or irrelevant to the user the ranking is set to zero which intern makes the weight, $\alpha$, on all rendition pairings with this information zero or less, guaranteeing that the information will not be presented. For efficiency reasons, information classes that are marked as having no importance are excluded from linear program a priori. 
 We can pre-populate this with default rankings based on a survey of typical user preferences. 
 
-\item[Attention Cost]
-The attentive cost of an rendition measures how distracting it is to gather information from the rendition. For example, if a user is using a rendition of a road network to navigate the map in search of a target, say their favorite coffee shop;  the longer it takes to find the target the more information they have to keep track of (\eg where they started, what turns they made, what landmarks they noticed). Tracking all of this information carries an attention cost that would otherwise be spent on the primary search task.
-The problem is that when the map is being constructed and the attention cost weight is need we do not know what the user's target(s) will be, where they will start their search, or what other information is presented that may help or hinder the search task. To address this, we use a Monte-Carlo simulation of user behavior which will be based on our experimental work.\jm{megan: reference for monte carlo?} %The presentation of that information is, in fact, our goal. Given this level of uncertainty we use a Monte-Carlo simulation to estimate the average \textit{time} it takes for the user to perform a search given a rendition-information pairing. The probability distribution used to generate this Monte-Carlo simulation are derived from a Markov-chain state model representing the actions a user can take when they encounter portions of a rendition. 
+\item[Attentive Cost]
+The attentive cost of a rendition measures how distracting it is to gather information from it. For example, if a user were using a rendition of a road network to navigate the map in search of a target, say their favorite coffee shop,  the longer it takes to find the target the more information they must keep track of (\textit{e.g.,} where they started, what turns they made, what landmarks they noticed). Tracking all of this information carries an attentive cost that would otherwise be spent on the primary search task.
+
+A key problem here is that when the map is being constructed and the attentive cost weight is needed, we do not know what the user's target(s) will be, where they will start their search, or what other information is presented that may help or hinder the search task. To address this, we will use a Monte-Carlo simulation of user behavior based on our experimental work.\jm{megan: reference for monte carlo?} %The presentation of that information is, in fact, our goal. Given this level of uncertainty, we use a Monte-Carlo simulation to estimate the average \textit{time} it takes for the user to perform a search given a rendition-information pairing. The probability distribution used to generate this Monte-Carlo simulation is derived from a Markov-chain state model representing the actions a user can take when he or she encounters portions of a rendition. 
 %\begin{figure}
 %\label{fig::exampleStates}%
 %	\begin{tikzpicture}
@@ -80,7 +94,7 @@ The problem is that when the map is being constructed and the attention cost wei
 %\end{figure}
 \end{description}
 
-%Suppose that a user is navigating a rendition of a road network. There are three basic states of the action: (1) moving the finger along a road, (2) encountering an intersection of roads, and (3) moving the finger of the road. Which particular state the user is in is dependent on the specific roads paired to the rendition, and their likelihood of moving from one state to another is dependent on both the particular road network (the information) and the rendition. For example, when the user encounters a an intersection they are very likely to continue onto a new road (\eg changing from the Intersection to On-Road state), but which road is dependent on many factors. Generally they are more likely to move in the same direction and increasingly less likely to turn all the way around. If the rendition presents very thin roads, they are more likely to travel in a direction that they don't feel the roads any more, moving into the "Off-Road" state. We model the probability of this state change by selecting a random angle between $-\pi$ and $\pi$ from a normal distribution with a mean direction of 0 (no change in direction from the approaching road). If the user travels in that direction but could still feel a road (based on the width of the finger and thickness of the rendition), then the angle will be modified to continue along that road, otherwise they will move randomly in that general direction off-road until they find a new road to follow.  
+%Suppose that a user is navigating a rendition of a road network. There are three basic states of the action: (1) moving a finger along the road, (2) encountering an intersection of roads, and (3) moving a finger along the new road. Which particular state the user is in depends on the specific roads paired to the rendition, and their likelihood of moving from one state to another depends on both the particular road network (the information) and the rendition. For example, when the user encounters an intersection, he or she is very likely to continue onto a new road (\eg changing from the Intersection to On-Road state), but which road depends on many factors. Generally, the user is more likely to move in the same direction and increasingly less likely to turn all the way around. If the rendition presents very thin roads, the user is more likely to travel in a direction that they don't feel the roads any more, moving into the "Off-Road" state. We model the probability of this state change by selecting a random angle between $-\pi$ and $\pi$ from a normal distribution with a mean direction of 0 (no change in direction from the approaching road). If the user travels in that direction but could still feel a road (based on the width of the finger and thickness of the rendition), then the angle will be modified to continue along that road, otherwise they will move randomly in that general direction off-road until they find a new road to follow.  
 
 %Each state change in the Markov-chain takes about step of one finger width, and we use a state change as a unit of time. For each simulation in the Monte-Carlo model, the user takes a "walk" across the map starting at a random point and moving towards a target. The starting points and targets are selected from a probability distribution where areas denser with information are more likely to be selected. The Markov-chain determines the walk that they take. We count the number of steps in the walk it takes to find the target given the rendition and information. The average number of steps over many models is our attention cost, meaning the more difficult (the longer it takes) it is to find information using a rendition-information pairing, the greater the attention cost and the poorer the pairing. 
 
@@ -96,8 +110,40 @@ The problem is that when the map is being constructed and the attention cost wei
 %A(R,D) = \frac{\sum_{i=1...N} A(W_i)}{N}
 %\end{equation}
 
-An optimization algorithm can use this information to decide what the optimal map is. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off the shelf algorithms exist which can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as an zero-one linear program interpretation based on the Generalized Assignment Problem
-\cite{unknown_GAP}. \jm{megan can you ptu this reference in?}
+\subsubsection{Proposed Development}
 
-%\subsection{AccessMaps Integration}
-%\label{sec:accessmaps-integration}
+An optimization algorithm can use this information to decide on the optimal map. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off-the-shelf algorithms can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as a zero-one linear program interpretation based on the Generalized Assignment Problem
+\cite{kuhn1955hungarian}. 
+
+\subsubsection{Validation}
+\ac{JM: need your input here}
+\ac{ make sure to include tests for both adequate balance for legibility and feature richness as well as tests for parametrization }
+
+The following validation statements should be tested and hold true if the design goal for this development activity is met: 
+
+The resulting tangible map depictions and choices will be valid.
+
+\ac{this is just an example of a usability validation:}
+When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
+
+Here we describe our validation tests for both statements. The data elements and sources are referencing tests and data collection that will occur with our community partners. These data collection activities are described in later sections with greater detail.
+
+\textbf{Validation Statement 1:
+The resulting tangible map depictions and choices will be valid.}
+
+\texttt{Performance Metrics:} 
+
+\texttt{Data Elements \& Sources:}
+
+\texttt{Analysis Procedure:}
+
+\textbf{Validation Statement 2:
+When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
+}
+
+
+\texttt{Performance Metrics:} 
+
+\texttt{Data Elements \& Sources:}
+
+\texttt{Analysis Procedure:}

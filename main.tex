@@ -13,8 +13,27 @@
 \usepackage{setspace}
 \usepackage{longtable}
 \usepackage{todonotes}
-\renewcommand{\baselinestretch}{1.6} 
+\usepackage{quoting}
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{lipsum}
+\usepackage{epigraph}
+\usepackage{url}
 
+\setlength{\epigraphwidth}{0.35\linewidth}
+\setlength{\epigraphrule}{0pt}
+\renewcommand*{\textflush}{flushright}
+\renewcommand*{\epigraphsize}{\normalsize\itshape}
+\newcommand*{\myquotingsource}{}
+\newenvironment{myquoting}[1]{%
+  \renewcommand*{\myquotingsource}{#1}
+  \begin{quoting}[font={itshape},leftmargin=3em,rightmargin=3em]%
+}{%
+  \par\medskip
+  \myquotingsource
+  \end{quoting}%
+}
+\renewcommand{\baselinestretch}{1.6} 
 \newcounter{todocounter}
 \newboolean{showComments} 
 \setboolean{showComments}{true}
@@ -22,17 +41,16 @@
 {\stepcounter{todocounter}
   \ifthenelse{\boolean{showComments}}{\todo[color=#2,inline]{#1 \thetodocounter: #3}}{}
 }
-
-\newcommand\jm[1]{{\color{red}#1}}
-\newcommand\jen[1]{{\color{red}#1}}
-\newcommand\ac[1]{{\color{red}#1}}
+\newcommand{\jm}[1]{{\color{red}#1}}
+\newcommand{\jen}[1]{{\color{red}#1}}
+\newcommand{\ac}[1]{{\color{red}#1}}
 
 \pagestyle{fancy}
 
 \bibliography{references}
 
 
-\title{Increasing Access for Deaf-Blind Individuals through Custom 3D Printed Maps}
+\title{Tactile Map Tiles: Improving Navigational Access for Deaf-Blind Individuals Using Custom 3D-Printed Maps}
 \author{Anat Caspi and Jennifer Mankoff}
 \date{January 2019}
 
@@ -60,8 +78,8 @@
 %\section{Criteria}
 %Comment out this section for the proposal submission.
 %n\input{criteria.tex}
-\section{Importance of Problem}
-\input{problem.tex}
+\section{Introduction and Problem Definition}
+\input{problem2.tex}
 \section{Development Activities}
 \input{development.tex}
 %\section{Research Activities}
@@ -77,18 +95,25 @@
 \section{Workplan}
 \input{workplan.tex}
 
-\SuspendCounters{page}
+\section{Related Work}
+\ac{since we included related work in each development task, are we required to have this section?}
+%\input{problem.tex}
+
+%\SuspendCounters{page}
 \renewcommand{\thepage}{}
 \begin{appendices}
-\section*{Data Management Plan}
+\SuspendCounters{page}
+\section{Data Management Plan}
 \input{data.tex}
-\section*{Human Subjects}
+\section{Human Subjects}
 \input{IRB.tex}
-\section*{Budget Narrative}
+\section{Budget Narrative}
 \label{budget}
 \input{budget-justification.tex}
-\section*{Letters of Commitment from Key Participating Organizations and Agencies}
+\section{Letters of Commitment from Key Participating Organizations and Agencies}
 \input{letters.tex}
+\section{OpenSidewalks Data Standard Description}
+\input{standard-data.tex}
 \end{appendices}
 
 \pagebreak
