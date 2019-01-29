@@ -3,3 +3,7 @@
 *.aux
 *.pdf
 *.toc
+*#*
+*.#*
+*.bbl
+*.blg
