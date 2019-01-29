@@ -1,36 +1,46 @@
 
 \label{sec:evaluation}
 
-Our evaluation plan is informed by the work we are concurrently pursuing in defining evaluation frameworks for all ATTRI Development Projects. While the standard is not yet publicly available, we believe the rubric presents a useful guide in pursuing a thorough evaluation of the technology. This evaluation plan will be fully followed twice during the project period, each time after one of the two development phases.
+In addition to the validation tests associated with each development task (explored in the validation section of each of Sections \ref{sec:fabrication}, \ref{sec:mapping-data}, \ref{sec:optimize}, \ref{sec:accessmap-integration}, \ref{sec:alerts}), there is a comprehensive evaluation plan to ascertain that our technology is correct and robust, failure-safe and within acceptable error tolerance.
+Our evaluation plan is informed by the work we are concurrently pursuing in defining evaluation frameworks for all ATTRI Development Projects. While the standard is not yet publicly available, we believe the rubric presents a useful guide in pursuing a thorough evaluation of the technology and our final deliverables. 
 
-
-\subsection{Defining Tests}
+\subsection{Defining Evaluation Tests}
 We begin by defining the tests involved in a full evaluation. 
-\begin{description}
-\item[Technology Unit Test]
-This test is designed to test the technology under different circumstances to (1) Ensure the technology works according to specification; (2) Ensure edge cases are handled properly; (3) Ascertain error and fault tolerance; (4) Test the optimization algorithm
-\item[]
-\item[]
-\item[]
-\item[]
-\item[]
-\item[]
-\item[]
-\item[]
 
-\end{description}
-\begin{description}
+\subsubsection{Pipeline Unit Test}
+\label{test:pipeline}
+This test is designed to test the pipeline that consumes OpenSidewalks data and generates an .stl model file for use by a 3D printer. The test will drive the pipeline under different circumstances to (1) Ensure the technology works according to specification; (2) Ensure edge cases are handled properly; (3) Ascertain error and fault tolerance; (4) Provide a general test for the optimization algorithm; (5) Ensure that the resulting .stl files are interpretable and usable by a 3D printer.
 
-\item[Implementing and Testing Optimization Algorithm (Proof of Concept)] While we have preliminary results demonstrating the viability of optimization for this problems space \ref{sec:optimization}, our proposed work includes recruiting and testing with Deaf-blind individuals \ref{sec:lab-tests}, and resolving remaining challenges in optimization \ref{sec:optimization}.
-\item[Testing in Natural Contexts (Proof of product)] Our proposed work also includes field studies. We will be testing the map in use in field settings \ref{sec:field-map}, and testing the entire system (including web-based map creation) in the field \ref{sec:field-web}. 
+This test will be repeated twice, once in the Proof of Concept phase and once again in the Proof of Product phase.
+
+\subsubsection{Testing Optimization Algorithm}
+While we have preliminary results demonstrating the viability of optimization for this problems space \ref{sec:optimize}, we have remaining challenges to resolve in optimization. While some of these pertain to user priorities and usability (and are addressed by the
+stakeholder input from the Community of Practice \ref{test:fieldtest}), others have to do with ascertaining that the algorithms are performing correctly and requires testing against some Gold Standard.
+In this test we will assess correctness, reliability and reproducibility of the models returned by our pipeline for identical and slightly varying search outputs.
+
+This test will be repeated multiple times in both the Proof of Concept and Proof of Product phases as it is the central development task in this proposal.
+
+
 \item[Fully Integrated Prototype (Proof of product)]
 Our final implementation will be integrated into AccessMap, a publicly available mapping application. \ref{sec:accessmap-integration}.
 \item[Verification of Technical Requirements (Proof of product)]
 We will validate the generalizability of our approach \jm{keep this? What is the appropriate technical validation?} \ref{sec:technical-validation}
-\end{description}
 
 
 Assessment should be used to improve the performance of the project through the feedback generated.
+
+\subsection{Tracking Data Collection}
+The PI and co-PI will maintain a Proof of Product tracking schedule to track both the Technical team and the Community of Practice group as they collect data and documentation. The PIs will keep an up-to-date integrated schedule that reflects updates from both teams on a constant basis.  Components of the evaluation reports will be created throughout the demonstration period, as the data and documentation for the project becomes available. These reports will be made available to the funding agency. The technology team in particular should inform the PI of any changes in schedule that could affect the overall development schedule (e.g., delays in the Proof of Product schedule).
+
+\subsection{Data Quality Assurance}
+
+The PI and co-PI will lead the teams to perform spot checks on the data as different types of data are being collected throughout the Proof of Product period to proactively manage risks related to data quality. This will allow the following:
+Avoiding insufficient data on performance of Proof of Product to reliably estimate impacts and/or benefits
+Addressing challenges in empirical data including lack of consistency, biases, and incompleteness
+Identifying and controlling sources of error
+Consideration of quality and quantity issues in data collection
+Ensuring data privacy and proprietary protections in line with human subjects’ protections
+Consideration of confounding factors.
 
 
 \subsection{Assessment of viability}

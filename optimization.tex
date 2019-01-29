@@ -19,8 +19,6 @@ A powered wheelchair user may need to know the location of curb ramps to navigat
 \textit{Optimization} algorithms makes tactile maps accessible and actionable.  Here, we describe both: (1) optimizations that balance information richness with tactile usability, and (2) optimization cost functions that allow customization by Deaf-blind users of varied aspects of their travel experience.
 %SK:  Now define optimization and what it does.
 
-%\jm{does this go in introduction instead?. also more about what optimization is/does A: I think that's where we were going before and it blew up the introduction. I think it's important to highlight here how optimization can make these maps actionable.}
-
 \subsubsection{Previous Development: Optimization Approach}
 Maps use many renditions to represent various forms of information. A  rendition could be a type of icon, or a colored line. Each rendition can represent only one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You cannot represent a road with just a circular icon. 
 %The binary value stating if a a piece of information (a.k.a., a datum), $d$, is compatible with an rendition, $r$, is denoted $c_{rd} \in \{0,1\}$. If the datum is then assigned to a compatible rendition, this is denoted with the binary value: $x_{rd}\in \{0,1\}$
@@ -120,8 +118,17 @@ A key problem here is that when the map is being constructed and the attention c
 An optimization algorithm can use this information to decide on the optimal map. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off-the-shelf algorithms can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as a zero-one linear program interpretation based on the Generalized Assignment Problem 
 \cite{kuhn1955hungarian}. 
 
+During this Development Stage we will also develop proper system tests to assess algorithmic accuracy/validity, costing for  enhanced Pedestrian Accessibility, testing that feasible routes are produced. Tests would be performed on  an array of Test addresses and resulting locations, on an array of user-defined choices and preferences, and test on 
+intended and randomly selected street segments in Seattle (to test for the presence and accuracy of sidewalk information)
+
+
+
 \subsubsection{Validation}
-We will take a user-centered, iterative approach to the design of our mapping solution. All of human-in-te-loop studies will be conducted with the population we are serving, Deaf-blind users. PI Caspi has extensive experience working with this population \jm{Anat: true?} and will  help to ensure that we have access to a sufficient number of participants.  
+We will take a user-centered, iterative approach to the design of our mapping solution. 
+All of human-in-te-loop studies will be conducted with the population we are serving, Deaf-blind users. 
+PI Caspi has extensive experience working with this population \jm{Anat: true?} and will  
+help to ensure that we have access to a sufficient number of participants.  
+
 
 \subsubsection{Map Study 2: Technical Validation of Speed and Robustness}
 \label{sec:technical-validation}
@@ -139,7 +146,9 @@ As stated above, we will collect data on the performance of the optimization alg
 
 \subsubsection{Map Study 2: Heuristic Validation of Accuracy}
 \label{sec:technical-validation}
-Our second  study will focus on validating the algorithm's {\em accuracy}. Specifically, we will show that the tangible maps produced by the optimization are correctly optimizing for the features specified in the objective function and that they adequately balance legibility and feature richness.  
+Our second  study will focus on validating the algorithm's {\em accuracy}. Specifically, we will
+show that the tangible maps produced by the optimization are correctly optimizing for the features specified in the 
+objective function and that they adequately balance legibility and feature richness for a variety of preferences.  
 
 \paragraph{Sample} 
 For this study, we will create a sample of 20 hand-curated maps using the process described in~\ref{sec:prev-devel-access}. These hand-curated maps represent optimal solutions as designed by people, and we will use them as comparison points for the maps that our algorithm generates.  We will then create a set of 100 3D printed maps using 5 separate objective functions representing a range of user needs.
@@ -175,6 +184,7 @@ The goal of our final study is to demonstrate the usefulness of our maps in the 
 \paragraph{Sample}
 We will work with Deaf-blind individuals to test the maps. 
 
+
 \paragraph{Environment}
 The study will take place in an outdoor environment where all of the complexities of real world navigation come into play. In addition, we will study map use for each participant in a location of their choosing.
 
@@ -182,3 +192,4 @@ The study will take place in an outdoor environment where all of the complexitie
 For the first trial, participants will be asked to identify two known locations within walking distance of each other. We will create a map that includes both, optimized based on participant preferences. Participants will navigate from one location to the other, using the map. This represents a relatively easy task, since it is a known navigation task, but will give participants a chance to tell us something about how the map enhances their experience.
 
 For the second trial, participants will be asked to explore the region around a new location. \jm{Anat: does this make sense? What is the normal process by which participants orient themselves?}.
+

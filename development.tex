@@ -4,24 +4,26 @@
 \label{sec:approach}
 
 
-The Tactile Map Tile concept builds on existing technology and research to combine \textit{additive manufacturing} (3D printing) and \textit{relevant pedestrian pathway details} to resolve a significant unmet communication need  for the Deaf-blind cohort. A single‐endpoint integration of these tools has yet to be piloted, tested or proven.  Our main challenge in translating this integration to active use in the field is to develop tactile informational encodings that simultaneously allow independent travel and are simple, clear  and pleasant to use via touch. 
+The Tactile Map Tile concept builds on existing technology and research to combine \textit{additive manufacturing} (3D printing) and \textit{relevant pedestrian pathway details}. A single‐endpoint integration of these tools has yet to be piloted, tested or proven.  Our main challenge in translating this integration to active use in the field is to develop tactile informational encodings that simultaneously allow independent travel and are simple, clear  and pleasant to use via touch. 
 
 %(i) The extent to which the proposed project methodology is meritorious, including consideration of the extent to which: (A) The proposed project shows awareness of the state-of-the-art for current, related products. (B) The proposed project employs appropriate concepts, components, or systems to develop the new or improved product. (C) The proposed project employs appropriate samples in tests, trials, and other development activities. (D) The proposed project conducts development activities in appropriate environment(s). (E) Input from individuals with disabilities and other key stakeholders is obtained to establish and guide proposed development activities. (F) The applicant identifies and justifies the stage(s) of development for the proposed project; and activities associated with each stage. 
 
-Above, we have delineated six development activity objectives necessary to satisfy our design criteria. We now describe each activity, including state-of-the-art, related work and the development and validation activities needed to incorporate it into our solution. To ensure usability of our design, we will pursue participatory design practices throughout all development activities. 
-%To highlight the participatory design work, each of the development activities will incorporate a section about design activities, detailing the design explorations and tests we will undertake in natural environments. \ac{if there's time add this}
-Finally, we map each activity to one of our three key deliverables: accessible web interfaces, algorithms for creating custom tactile maps, and a printing and update notification system.
-
-Our development activities focus on iterative refinement of the
+In Section \ref{sec:design-objectives} above, we have delineated six development activity objectives necessary to satisfy our design criteria. Our development activities focus on iterative refinement of the
 three main threads of the work, namely the development of high quality
 optimal tangible maps, the development of a web interface that
 empowers Deaf-blind individuals to requisition their own maps on the
-fly and a subscription service to updates about the area of interest to travelers. Stakeholder input activities (described in Section \ref{sec:stakeholder-input}) will be weaved-in throughout the development of the project to offer interim and development product validation. Our Workplan (Section \ref{sec:workplan}) will describe the development flow in greater detail.
+fly and a subscription service to updates about the area of interest to travelers. Stakeholder input activities (described in Section \ref{sec:stakeholder-input}) will be weaved-in throughout the development of the project to offer interim and development product validation. Our Workplan (Section \ref{sec:workplan}) will describe the development flow in greater detail. 
+
+We now describe each activity, including state-of-the-art, related work and the development and validation activities needed to incorporate it into our solution. To ensure usability of our design, we will pursue participatory design practices throughout all development activities. 
+%To highlight the participatory design work, each of the development activities will incorporate a section about design activities, detailing the design explorations and tests we will undertake in natural environments. \ac{if there's time add this}
+Finally, we map each activity to one of our three key deliverables: accessible web interfaces, algorithms for creating custom tactile maps, and a printing and update notification system.
+
+
 
 \subsection{Form Factor: Tangible Map Design Using Additive Manufacturing (3D printing)}
-This section describes development activities associated with integrating the relevant map information in the right form factor. Specifically, the development activity of producing an automated pipeline to produce 3D print model of a tcatile map is the first part of delivering tangible map design (Product 1). A 3D printed solution is suitable for our user population, ensuring it relays mobility information in a non-visual, non-auditory manner, but is also affordable, cost-effective, scalable and reproducible.  The importance of bringing down the cost and increasing accessibility of tactile maps is discussed.
+This section describes development activities associated with integrating the relevant map information in the right form factor. Specifically, the development activity of creating an automated pipeline to produce 3D print model of a tactile map is the first part of delivering tangible map design (Product 1). A 3D printed solution is suitable for our user population, as it relays mobility information in a non-visual, non-auditory manner, and is also affordable, cost-effective, scalable and reproducible.  The importance of bringing down the cost and increasing accessibility of tactile maps is discussed.
 
-Development goal: Extending our aggregated accessibility map codebase to support a production-level pipeline that produces 3D printed map models thereby extending reach and scalability (while reducing costs) of tactile maps.  
+Development goal: Extending our aggregated accessibility map codebase to support a production-level pipeline that produces 3D printed map models thereby extending reach and scalability while reducing costs of tactile maps.  
 
 \label{sec:fabrication}
 \input{fabrication.tex}
@@ -63,9 +65,9 @@ Our overarching goal is a system that can harness the power of updated transport
 
 \subsection{Community of Practice Input}
 \input{stakeholder-input.tex}
-\label{sec:stakeholder}
+\label{sec:stakeholder-input}
 
-\ac{ JM: we have verbiage to summarize the development products, but I'm not sure it's necessary and we need the space. Choose to use it if you like}
+%{ JM: we have verbiage to summarize the development products, but I'm not sure it's necessary and we need the space. Choose to use it if you like}
 \begin{comment}
 
 
@@ -76,8 +78,6 @@ Our data-driven, scalable solution will close some significant travel informatio
     \item[Product 2: Web Interaction] A method for \textit{indicating user needs} such as trip-purpose and other preferences in order to properly optimize the tactile features for specific travel use. This allows creation of maps that support completely different types of travel, for instance, neighborhood point-of-interest exploration and multimodal trip-planning integrating on-demand, community transportation and other vehicle segments for which GTFS feeds are available.
     \item[Product 3: Updates] A 'subscription service' to a geographical travel area, whereby users can receive e-mail alerts and reporting of real-time transit information and impacted itineraries (e.g. vehicle delays, trip reroutes, trip cancellations, reported sidewalk closures). 
 \end{description}
-
-\end{comment}
 
 We then discuss our
 optimization approach in Section~\ref{sec:optimize}, and the iterative
@@ -97,7 +97,6 @@ needs.
 We conclude with a discussion of the stage of development
 (Section~\ref{sec:stage}). We argue that the work represents a
 combination of proof of concept and proof of product. 
-
 Our development strategy includes:
 \begin{itemize}
     \item Scalable, standardized methods to collect, represent and maintain open source data about pedestrian and fixed routes.
@@ -106,13 +105,20 @@ Our development strategy includes:
 \end{itemize}
  Additionally, improved transit information integration provide tools for efficient tactile-density decision making.
 
+\end{comment}
+
+
+
 \begin{comment}
 Our commitment to maintain all foundational work open and shared, including software, data, and standards, facilitates adoption by other parties to leverage our work and build additional tools to support any population of interest.
-\end{comment}
 
 
 %Intro: The solution will be integrated into the existing AccessMap infrastructure.
 %(Caspi writes)
+
+
+\subsubsection{Product 1: Automatically Optimize Map Design Based on Specific Needs}
+\ac{this is already in the Development plan, need to include the usability plan for optimization}
 
 \jm{Notes from conversation with Harniss:
 Emphasize iteration
@@ -124,8 +130,6 @@ explicate the algorithms
 ++describe to the reviewer}
 
 
-%\subsubsection{Product 1: Automatically Optimize Map Design Based on Specific Needs}
-%\ac{this is already in the Development plan, need to include the usability plan for optimization}
 %\label{sec:optimize}
 %\input{optimization.tex}
 
@@ -145,14 +149,12 @@ Map Generation}
 \label{sec:accessmap-studies}
 \input{accessmap-studies.tex}
 
-\subsubsection{Input from Stakeholders}
-\label{sec:stakeholder-input}
-\input{stakeholder-input.tex}
 
 \subsubsection{Stage of Development and Specific Plan}
 \label{sec:stage}
 \input{development-stage.tex}    
 
+\end{comment}
 
 %\subsection{Enabling User to Produce Maps Themselves (Mankoff)}
 
