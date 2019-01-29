@@ -1,19 +1,25 @@
 
 \subsubsection{Background and State of the Art}
 
-Route planning requires information that may be specific to the person creating a map. For example, Google Maps routes pedestrian directions from University Street Station on Second Avenue to Seattle City Hall on Fifth Avenue up Seneca Street, which has a steep 10 percent grade that is problematic for people in wheelchairs or with certain injuries or health conditions.
+Route planning requires information that may be specific to the person
+creating a map. For example, Google Maps routes pedestrian directions
+from University Street Station on Second Avenue to Seattle City Hall
+on Fifth Avenue up Seneca Street, which has a steep 10 percent grade
+that is problematic for people in wheelchairs or with certain injuries
+or health conditions. 
 %SK:  how about older people?  That's not a "health condition" to me :).
 %In contrast, AccessMap routes people two blocks north to Pike Street, which has a much gentler grade of less than 2 percent.
 %For such people, it is important to ensure that a map clearly indicates slope. For those concerned about safety, however, it might be more important to show whether a guard rail is present near a particularly busy street, whether a sidewalk is wide or narrow near a busy street, or whether an alternative pedestrian route connects their sidewalk to a pedestrian footpath removed from the road. 
+
 %For accessibility, 
-users have varied needs.  A powered wheelchair user may need to know the location of curb ramps to navigate an intersection. A blind user may want to actively avoid certain types of curb ramps (such as those pointing to the center of an intersection). These different informational requirements present a particularly difficult situation to resolve without a detailed description of the available paths, how they are connected, and particular attributes (like curb ramps and their locations) \cite{bolten2017}. Furthermore, it is not possible to represent every possible piece of important information on any map. In particular, the amount of information that can be represented is further reduced in a tactile map. 
-%SK:  Explain reason for preceding statement.
+%users have varied needs.
+A powered wheelchair user may need to know the location of curb ramps to navigate an intersection. A blind user may want to actively avoid certain types of curb ramps (such as those pointing to the center of an intersection). These different informational requirements present a particularly difficult situation to resolve without a detailed description of the available paths, how they are connected, and particular attributes (like curb ramps and their locations) \cite{bolten2017}. Furthermore, it is not possible to represent every possible piece of important information on any map. This is even more pronounced for tactile maps, which can only represent a small amount of meta data beyond the basics of two-dimensional layout using features such as height, texture, and shape. 
 
 %SK.  Start discussion here.
 \textit{Optimization} algorithms makes tactile maps accessible and actionable.  Here, we describe both: (1) optimizations that balance information richness with tactile usability, and (2) optimization cost functions that allow customization by Deaf-blind users of varied aspects of their travel experience.
 %SK:  Now define optimization and what it does.
 
-\jm{does this go in introduction instead?. also more about what optimization is/does A: I think that's where we were going before and it blew up the introduction. I think it's important to highlight here how optimization can make these maps actionable.}
+%\jm{does this go in introduction instead?. also more about what optimization is/does A: I think that's where we were going before and it blew up the introduction. I think it's important to highlight here how optimization can make these maps actionable.}
 
 \subsubsection{Previous Development: Optimization Approach}
 Maps use many renditions to represent various forms of information. A  rendition could be a type of icon, or a colored line. Each rendition can represent only one class of information in a map. For example, a circular icon could note an accessible intersection, or a guide-dog friendly coffee shop, but it would be confusing if it represented both. Not all forms of information are compatible with all renditions. You cannot represent a road with just a circular icon. 
@@ -39,9 +45,8 @@ Our goal is to assign the most relevant pieces of information to the most useful
 %\end{subnumcases}
 
 %\item[Weighting Information-Rendition Pairings]
-Specifically, when deciding how (or whether) to render a piece of information, we must consider three features with the acronym (CIA): the rendition's communicative ability (C), the data's importance (I), and the attentive cost (A).
-%SK: Will readers know what "attentive cost" means? You use this interchangeably with "attention cost."  I changed all refs to the former for consistency.
-We combine these by subtracting the attentive cost ($A$)  from the benefits ($C*I$): 
+Specifically, when deciding how (or whether) to render a piece of information, we must consider three features with the acronym (CIA): the rendition's communicative ability (C), the data's importance (I), and the attention cost (A).
+We combine these by subtracting the attention cost ($A$)  from the benefits ($C*I$): 
 \begin{equation}
 \label{eq::CIA}
 \alpha(r_i, d_j) = C(r_i, d_j)*I(d_j)-A(r_i, d_j)
@@ -67,10 +72,10 @@ Users know what information is important to them. They know the accessibility fe
 Thus, we ask users to rank information. %, the higher the ranking, $I(d_j)$, of a class of information, the higher the weight. If the information is useless or irrelevant to the user the ranking is set to zero which intern makes the weight, $\alpha$, on all rendition pairings with this information zero or less, guaranteeing that the information will not be presented. For efficiency reasons, information classes that are marked as having no importance are excluded from linear program a priori. 
 We can pre-populate this with default rankings based on a survey of typical user preferences. 
 
-\item[Attentive Cost]
-The attentive cost of a rendition measures how distracting it is to gather information from it. For example, if a user were using a rendition of a road network to navigate the map in search of a target, say their favorite coffee shop,  the longer it takes to find the target the more information they must keep track of (\textit{e.g.,} where they started, what turns they made, what landmarks they noticed). Tracking all of this information carries an attentive cost that would otherwise be spent on the primary search task.
+\item[Attention Cost]
+The attention cost of a rendition measures how distracting it is to gather information from it. For example, if a user were using a rendition of a road network to navigate the map in search of a target, say their favorite coffee shop,  the longer it takes to find the target the more information they must keep track of (\textit{e.g.,} where they started, what turns they made, what landmarks they noticed). Tracking all of this information carries an attention cost that would otherwise be spent on the primary search task.
 
-A key problem here is that when the map is being constructed and the attentive cost weight is needed, we do not know what the user's target(s) will be, where they will start their search, or what other information is presented that may help or hinder the search task. To address this, we will use a Monte-Carlo simulation of user behavior based on our experimental work.\jm{megan: reference for monte carlo?} %The presentation of that information is, in fact, our goal. Given this level of uncertainty, we use a Monte-Carlo simulation to estimate the average \textit{time} it takes for the user to perform a search given a rendition-information pairing. The probability distribution used to generate this Monte-Carlo simulation is derived from a Markov-chain state model representing the actions a user can take when he or she encounters portions of a rendition. 
+A key problem here is that when the map is being constructed and the attention cost weight is needed, we do not know what the user's target(s) will be, where they will start their search, or what other information is presented that may help or hinder the search task. To address this, we will use a Monte-Carlo simulation of user behavior based on our experimental work.\jm{megan: reference for monte carlo?} %The presentation of that information is, in fact, our goal. Given this level of uncertainty, we use a Monte-Carlo simulation to estimate the average \textit{time} it takes for the user to perform a search given a rendition-information pairing. The probability distribution used to generate this Monte-Carlo simulation is derived from a Markov-chain state model representing the actions a user can take when he or she encounters portions of a rendition. 
 %\begin{figure}
 %\label{fig::exampleStates}%
 %	\begin{tikzpicture}
@@ -112,38 +117,68 @@ A key problem here is that when the map is being constructed and the attentive c
 
 \subsubsection{Proposed Development}
 
-An optimization algorithm can use this information to decide on the optimal map. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off-the-shelf algorithms can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as a zero-one linear program interpretation based on the Generalized Assignment Problem
+An optimization algorithm can use this information to decide on the optimal map. In optimization terms, $C*I-A$ is an \textit{objective function}, which can calculate a score for a possible map. Off-the-shelf algorithms can solve for the best solution (map in our case). For this problem, we can then  formulate the optimization as a zero-one linear program interpretation based on the Generalized Assignment Problem 
 \cite{kuhn1955hungarian}. 
 
 \subsubsection{Validation}
-\ac{JM: need your input here}
-\ac{ make sure to include tests for both adequate balance for legibility and feature richness as well as tests for parametrization }
+We will take a user-centered, iterative approach to the design of our mapping solution. All of human-in-te-loop studies will be conducted with the population we are serving, Deaf-blind users. PI Caspi has extensive experience working with this population \jm{Anat: true?} and will  help to ensure that we have access to a sufficient number of participants.  
 
-The following validation statements should be tested and hold true if the design goal for this development activity is met: 
+\subsubsection{Map Study 2: Technical Validation of Speed and Robustness}
+\label{sec:technical-validation}
+Our first study will focus on validating the algorithm's {\em speed} and {\em robustness}. This is solely a technical validation. The algorithm we are using is well understood, however in any optimization, the goodness of the result and speed are both influenced by the goodness of the objective function. Thus it is important to empirically validate the quality of the results.
 
-The resulting tangible map depictions and choices will be valid.
-
-\ac{this is just an example of a usability validation:}
-When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
-
-Here we describe our validation tests for both statements. The data elements and sources are referencing tests and data collection that will occur with our community partners. These data collection activities are described in later sections with greater detail.
-
-\textbf{Validation Statement 1:
-The resulting tangible map depictions and choices will be valid.}
-
-\texttt{Performance Metrics:} 
-
-\texttt{Data Elements \& Sources:}
-
-\texttt{Analysis Procedure:}
-
-\textbf{Validation Statement 2:
-When routing and choosing map features for no-vision pedestrians, the optimization algorithm favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).
-}
+\paragraph{Sample} 
+Our sample will be a random selection of 1000 regions taken from the Seattle metro region. Our goal is to demonstrate successful coverage of a wide range of possible regional features. Since the objective function may differ from user to user, we will run the algorithm through a range of optimization parameters for each of these regions. 
 
 
-\texttt{Performance Metrics:} 
+\paragraph{Environment}
+We will run the optimization on all samples on a server machine similar to the environment in which our back-end product will ultimately run. During runs, we will collect information about the length of time it takes to reach a solution, and errors that occur during the optimization process, and features of the final result of the optimization, including its score on the objective function. 
 
-\texttt{Data Elements \& Sources:}
+\paragraph{Test Trials}
+As stated above, we will collect data on the performance of the optimization algorithm across a large set of regions and objective function parameters. We will validate that the optimization algorithm can run in real time or requires minimal wait time (our {\em speed} goal), and that it  produces a valid, 3D printable result in each case ({\em robustness} goal)
 
-\texttt{Analysis Procedure:}
+\subsubsection{Map Study 2: Heuristic Validation of Accuracy}
+\label{sec:technical-validation}
+Our second  study will focus on validating the algorithm's {\em accuracy}. Specifically, we will show that the tangible maps produced by the optimization are correctly optimizing for the features specified in the objective function and that they adequately balance legibility and feature richness.  
+
+\paragraph{Sample} 
+For this study, we will create a sample of 20 hand-curated maps using the process described in~\ref{sec:prev-devel-access}. These hand-curated maps represent optimal solutions as designed by people, and we will use them as comparison points for the maps that our algorithm generates.  We will then create a set of 100 3D printed maps using 5 separate objective functions representing a range of user needs.
+
+Our study will also depend on an expert sample of orientation and mobility experts, who can help to assess the value of the maps we created before we test them with end users. 
+
+\paragraph{Environment}
+As wit the previous study, we will run the optimization on all samples on a server machine similar to the environment in which our back-end product will ultimately run. During runs, we will collect information about the length of time it takes to reach a solution, and errors that occur during the optimization process, and features of the final result of the optimization, including its score on the objective function. In addition, we will print out the result of the optimization on an Ultimaker desktop 3D printer.
+
+\paragraph{Test Trials}
+We will inspect the 3D printed maps from the hand curated and optimized samples and assess how well they each balance for legibility and feature richness. This will be a heuristic evaluation by experts (orientation and mobility experts) focused on assessing how well the final maps meet specific goals set in the objective function. To accomplish this, we will present the experts with English versions of the five objective functions we are testing such as 'favors streets with sidewalks and lower environmental stress (e.g., lower speed limits and traffic volume).' 
+
+\subsubsection{Map Study 3: Map Understanding by End Users With and Without Optimization}
+\label{sec:lab-tests}
+Our third study will focus on demonstrating the benefits to end-user understanding of optimization over standard map designs in a controlled fashion. For this study, we will use pre-defined maps that focus on neighborhoods familiar to participants. We will ask participants to indicate the location of a well known landmark, and to describe the region around the landmark. 
+
+\paragraph{Sample}
+Our primary goal in this study is to understand whether someone without vision can correctly use the tactile information in the maps. Although this project aims to improve the transit experience for Deaf-blind participants, the specific issue of map interpretability can be tested just as effectively with people who are Blind, which is our intention. In this way, we will reduce the burden on the smaller local population of Deaf-blind individuals by focusing on them in later studies, where their unique perspectives are more critical.
+
+\paragraph{Environment}
+The study will be conducted in a lab environment. Because we are focusing on readability, this study will be more effective if we can control for events that might arise in the field, such as distractions.
+
+\paragraph{Test trials}
+We will ask participants to describe features of a route between two landmarks. We will then have them perform the same tasks using an optimized map. \jm{how do we ensure familiarity? do we care about route finding? How do we make sure the optimization is relevant to them? How do we train them on all the renditions' meanings?+}
+
+
+
+\subsubsection{Map Study 4: Navigation Benefits of Optimization}
+\label{sec:field-map}
+%\jm{I think we also want a study of them choosing a route of their choice and using our system?}
+The goal of our final study is to demonstrate the usefulness of our maps in the field. For this study, we want to increase realism so we will be more likely to discover unexpected variables that may impact the success of the product. 
+
+\paragraph{Sample}
+We will work with Deaf-blind individuals to test the maps. 
+
+\paragraph{Environment}
+The study will take place in an outdoor environment where all of the complexities of real world navigation come into play. In addition, we will study map use for each participant in a location of their choosing.
+
+\paragraph{Test Trials}
+For the first trial, participants will be asked to identify two known locations within walking distance of each other. We will create a map that includes both, optimized based on participant preferences. Participants will navigate from one location to the other, using the map. This represents a relatively easy task, since it is a known navigation task, but will give participants a chance to tell us something about how the map enhances their experience.
+
+For the second trial, participants will be asked to explore the region around a new location. \jm{Anat: does this make sense? What is the normal process by which participants orient themselves?}.
